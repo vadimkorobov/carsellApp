@@ -45,15 +45,19 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<CarDto> getAll() {
-        List<CarDto> carDtos=new ArrayList<>();
-       List<Car> cars=carRepository.findAll();
-       for(Car car: cars){
-        CarDto dto=   CarDto.builder().model(car.getModel())
-                   .carPrice(car.getCarPrice())
-                   .picture(Base64.getEncoder().encodeToString(decompressBytes(car.getPicture()))).build();
-                   carDtos.add(dto);
-       }
-       return carDtos;
+        List<CarDto> carDtos = new ArrayList<>();
+        List<Car> cars = carRepository.findAll();
+        for (Car car : cars) {
+            CarDto dto = CarDto.builder().model(car.getModel())
+                    .carPrice(car.getCarPrice())
+                    .picture(Base64.getEncoder().encodeToString(decompressBytes(car.getPicture())))
+                    .color(car.getColor())
+                    .engineType(car.getEngineType())
+                    .numberOfCarOwners(car.getNumberOfCarOwners())
+                    .carMileage(car.getCarMileage())
+                    .power(car.getPower()).build();
+            carDtos.add(dto);
+        }
+        return carDtos;
     }
 }
-
